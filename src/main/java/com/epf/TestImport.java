@@ -1,6 +1,7 @@
 package com.epf;
 
 import com.epf.config.DatabaseConfig;
+import com.epf.core.MapService;
 import com.epf.core.PlanteService;
 import com.epf.core.ZombieService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,10 +12,10 @@ public class TestImport {
         // Initialisation du contexte avec la configuration de la base de données
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DatabaseConfig.class);
 
-        // Get PlanteService bean
+        // Get bean
         PlanteService planteService = context.getBean(PlanteService.class);
-
         ZombieService zombieService = context.getBean(ZombieService.class);
+        MapService mapService = context.getBean(MapService.class);
 
 
         // utiliser le service pour get et montrer les plantes
@@ -23,6 +24,8 @@ public class TestImport {
             planteService.getAllPlantes().forEach(System.out::println);
             System.out.println("Zombies:\n");
             zombieService.getAllZombies().forEach(System.out::println);
+            System.out.println("Map:\n");
+            mapService.getAllMaps().forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }

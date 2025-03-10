@@ -23,7 +23,7 @@ public class ZombieService {
     }
 
     // Ajouter un zombie
-    public void createZombie(Zombie zombie) throws ServiceException {
+    public void create(Zombie zombie) throws ServiceException {
         try {
             zombieDao.create(zombie);
         } catch (Exception e) {
