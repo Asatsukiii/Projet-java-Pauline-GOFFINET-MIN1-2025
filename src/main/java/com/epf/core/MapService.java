@@ -12,15 +12,15 @@ public class MapService {
     public MapService(MapDao mapDao) {
         this.mapDao = mapDao;
     }
-    public void create(Map map) throws ServiceException {
+    public void create(MapJeu mapJeu) throws ServiceException {
         try {
-            mapDao.create(map);
+            mapDao.create(mapJeu);
         } catch (Exception e) {
             throw new ServiceException("Erreur lors de la création de la map", e);
         }
     }
 
-    public List<Map> getAllMaps() throws ServiceException {
+    public List<MapJeu> getAllMaps() throws ServiceException {
         try {
             return mapDao.getAllMaps();
         } catch (Exception e) {

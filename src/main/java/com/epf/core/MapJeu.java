@@ -1,12 +1,12 @@
 package com.epf.core;
 
-public class Map {
+public class MapJeu {
     private int id;
     private int ligne;
     private int colonne;
     private String cheminImage;
 
-    public Map(int id, int ligne, int colonne, String cheminImage) {
+    public MapJeu(int id, int ligne, int colonne, String cheminImage) {
         this.id = id;
         this.ligne = ligne;
         this.colonne = colonne;

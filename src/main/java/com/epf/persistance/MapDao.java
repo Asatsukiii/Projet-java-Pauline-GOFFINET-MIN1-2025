@@ -1,6 +1,6 @@
 package com.epf.persistance;
 
-import com.epf.core.Map;
+import com.epf.core.MapJeu;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,20 +15,18 @@ public class MapDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void create(Map map) {
+    public void create(MapJeu mapJeu) {
         String sql = "INSERT INTO map (ligne, colonne, chemin_image) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, map.getLigne(), map.getColonne(), map.getCheminImage());
+        jdbcTemplate.update(sql, mapJeu.getLigne(), mapJeu.getColonne(), mapJeu.getCheminImage());
     }
 
-    public List<Map> getAllMaps() {
+    public List<MapJeu> getAllMaps() {
         String sql = "SELECT * FROM map";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new Map(
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new MapJeu(
                 rs.getInt("id_map"),
                 rs.getInt("ligne"),
                 rs.getInt("colonne"),
                 rs.getString("chemin_image")
         ));
     }
-
-
 }
