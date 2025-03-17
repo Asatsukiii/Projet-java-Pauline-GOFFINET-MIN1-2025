@@ -6,6 +6,9 @@ public class MapJeu {
     private int colonne;
     private String cheminImage;
 
+    public MapJeu() {
+    }
+
     public MapJeu(int id, int ligne, int colonne, String cheminImage) {
         this.id = id;
         this.ligne = ligne;

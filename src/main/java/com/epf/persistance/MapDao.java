@@ -22,11 +22,6 @@ public class MapDao {
 
     public List<MapJeu> getAllMaps() {
         String sql = "SELECT * FROM map";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> new MapJeu(
-                rs.getInt("id_map"),
-                rs.getInt("ligne"),
-                rs.getInt("colonne"),
-                rs.getString("chemin_image")
-        ));
+        return jdbcTemplate.query(sql, new MapRowMapper());
     }
 }

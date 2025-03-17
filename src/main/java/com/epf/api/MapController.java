@@ -3,6 +3,7 @@ package com.epf.api;
 import com.epf.core.MapService;
 import com.epf.core.MapJeu;
 import com.epf.core.ServiceException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,18 @@ public class MapController {
             return ResponseEntity.badRequest().body("Erreur lors de la création de la map : " + e.getMessage()); // 400 Bad Request
         }
     }
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getMapById(@PathVariable int id) {
+        try {
+            MapJeu foundMap = mapService.getMap(id);
+            return ResponseEntity.ok(foundMap); // Retourne la map trouvée en JSON
+        } catch (ServiceException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Map non trouvée : " + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur interne du serveur");
+        }
+    }
+
 
 //    @DeleteMapping("/{id}")
 //    public void deleteMap(@PathVariable int id) throws ServiceException {
