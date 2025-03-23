@@ -1,5 +1,7 @@
+com\epf\persistance\MapRowMapper.class
 com\epf\config\DatabaseConfig.class
 com\epf\core\ServiceException.class
+com\epf\core\MapJeu.class
 com\epf\config\WebConfig.class
 com\epf\core\PlanteService.class
 com\epf\core\MapService.class
@@ -15,4 +17,3 @@ com\epf\persistance\PlanteDao.class
 com\epf\core\Plante.class
 com\epf\persistance\MapDao.class
 com\epf\persistance\ZombieDao.class
-com\epf\core\Map.class

@@ -23,8 +23,7 @@ public class MapController {
     public List<MapJeu> getAllMaps() throws ServiceException {
         return mapService.getAllMaps();
     }
-    //GetMapping{/id}
-    //response entity (contener de la réponse°
+
 
     @PostMapping("/create")
     public ResponseEntity<String> addMap(@RequestBody MapJeu map) {
@@ -46,10 +45,21 @@ public class MapController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur interne du serveur");
         }
     }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateMap(@PathVariable int id, @RequestBody MapJeu mapJeu) {
+        try {
+            // Mettre à jour la map en utilisant le service
+            mapJeu.setId(id); // Assure-toi que l'ID est correctement assigné
+            mapService.update(mapJeu); // Appel à la méthode de mise à jour dans le service
+            return ResponseEntity.ok("Map mise à jour avec succès !"); // 200 OK
+        } catch (ServiceException e) {
+            return ResponseEntity.badRequest().body("Erreur lors de la mise à jour de la map : " + e.getMessage()); // 400 Bad Request
+        }
+    }
 
 
-//    @DeleteMapping("/{id}")
-//    public void deleteMap(@PathVariable int id) throws ServiceException {
-//        mapService.delete(id);
-//    }
+    @DeleteMapping("/delete/{id}")
+    public void deleteMap(@PathVariable int id) throws ServiceException {
+        mapService.delete(id);
+    }
 }
