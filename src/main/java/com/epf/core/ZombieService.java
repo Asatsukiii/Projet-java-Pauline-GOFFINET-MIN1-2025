@@ -39,4 +39,46 @@ public class ZombieService {
             throw new ServiceException("Erreur lors de la récupération du zombie avec l'ID " + id, e);
         }
     }
+
+    public void update(Zombie zombie) throws ServiceException {
+        try {
+            // Récupérer le zombie existant depuis la base de données
+            Zombie existingZombie = zombieDao.getZombieById(zombie.getId_zombie());
+
+            // Mettre à jour les champs seulement si la nouvelle valeur est valide
+            if (zombie.getNom() != null && !zombie.getNom().isEmpty()) {
+                existingZombie.setNom(zombie.getNom());
+            }
+
+            if (zombie.getPoint_de_vie() > 0) {
+                existingZombie.setPoint_de_vie(zombie.getPoint_de_vie());
+            }
+
+            if (zombie.getAttaque_par_seconde() > 0) {
+                existingZombie.setAttaque_par_seconde(zombie.getAttaque_par_seconde());
+            }
+
+            if (zombie.getDegat_attaque() > 0) {
+                existingZombie.setDegat_attaque(zombie.getDegat_attaque());
+            }
+
+            if (zombie.getVitesse_de_deplacement() > 0) {
+                existingZombie.setVitesse_de_deplacement(zombie.getVitesse_de_deplacement());
+            }
+
+            if (zombie.getChemin_image() != null && !zombie.getChemin_image().isEmpty()) {
+                existingZombie.setChemin_image(zombie.getChemin_image());
+            }
+
+            if (zombie.getId_map() != 0) {
+                existingZombie.setId_map(zombie.getId_map());
+            }
+
+            // Mise à jour du zombie dans la base de données
+            zombieDao.update(existingZombie);
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la mise à jour du zombie", e);
+        }
+    }
+
 }

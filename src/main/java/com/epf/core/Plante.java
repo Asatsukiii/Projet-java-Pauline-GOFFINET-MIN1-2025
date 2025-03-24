@@ -1,70 +1,75 @@
 package com.epf.core;
 
 public class Plante {
-    private int id;
+    private int id_plante;
     private String nom;
-    private int pointDeVie;
-    private double attaqueParSeconde;
-    private int degatAttaque;
+    private int point_de_vie;
+    private double attaque_par_seconde;
+    private int degat_attaque;
     private int cout;
-    private double soleilParSeconde;
+    private double soleil_par_seconde;
     private String effet;
-    private String cheminImage;
+    private String chemin_image;
 
-    // Constructeur
-    public Plante(int id, String nom, int pointDeVie, double attaqueParSeconde, int degatAttaque, int cout, double soleilParSeconde, String effet, String cheminImage) {
-        this.id = id;
-        this.nom = nom;
-        this.pointDeVie = pointDeVie;
-        this.attaqueParSeconde = attaqueParSeconde;
-        this.degatAttaque = degatAttaque;
-        this.cout = cout;
-        this.soleilParSeconde = soleilParSeconde;
-        this.effet = effet;
-        this.cheminImage = cheminImage;
+    public Plante() {
+
     }
 
+    // Constructeur
+    public Plante(int id_plante, String nom, int point_de_vie, double attaque_par_seconde, int degat_attaque, int cout, double soleil_par_seconde, String effet, String chemin_image) {
+        this.id_plante = id_plante;
+        this.nom = nom;
+        this.point_de_vie = point_de_vie;
+        this.attaque_par_seconde = attaque_par_seconde;
+        this.degat_attaque = degat_attaque;
+        this.cout = cout;
+        this.soleil_par_seconde = soleil_par_seconde;
+        this.effet = effet;
+        this.chemin_image = chemin_image;
+    }
+
+
     // Getters et Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId_plante() { return id_plante; }
+    public void setId_plante(int id_plante) { this.id_plante = id_plante; }
 
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
 
-    public int getPointDeVie() { return pointDeVie; }
-    public void setPointDeVie(int pointDeVie) { this.pointDeVie = pointDeVie; }
+    public int getPoint_de_vie() { return point_de_vie; }
+    public void setPoint_de_vie(int point_de_vie) { this.point_de_vie = point_de_vie; }
 
-    public double getAttaqueParSeconde() { return attaqueParSeconde; }
-    public void setAttaqueParSeconde(double attaqueParSeconde) { this.attaqueParSeconde = attaqueParSeconde; }
+    public double getAttaque_par_seconde() { return attaque_par_seconde; }
+    public void setAttaque_par_seconde(double attaque_par_seconde) { this.attaque_par_seconde = attaque_par_seconde; }
 
-    public int getDegatAttaque() { return degatAttaque; }
-    public void setDegatAttaque(int degatAttaque) { this.degatAttaque = degatAttaque; }
+    public int getDegat_attaque() { return degat_attaque; }
+    public void setDegat_attaque(int degat_attaque) { this.degat_attaque = degat_attaque; }
 
     public int getCout() { return cout; }
     public void setCout(int cout) { this.cout = cout; }
 
-    public double getSoleilParSeconde() { return soleilParSeconde; }
-    public void setSoleilParSeconde(double soleilParSeconde) { this.soleilParSeconde = soleilParSeconde; }
+    public double getSoleil_par_seconde() { return soleil_par_seconde; }
+    public void setSoleil_par_seconde(double soleil_par_seconde) { this.soleil_par_seconde = soleil_par_seconde; }
 
     public String getEffet() { return effet; }
     public void setEffet(String effet) { this.effet = effet; }
 
-    public String getCheminImage() { return cheminImage; }
-    public void setCheminImage(String cheminImage) { this.cheminImage = cheminImage; }
+    public String getChemin_image() { return chemin_image; }
+    public void setChemin_image(String chemin_image) { this.chemin_image = chemin_image; }
 
     // Méthode pour afficher les infos
     @Override
     public String toString() {
         return "Plante{" +
-                "id=" + id +
+                "id=" + id_plante +
                 ", nom='" + nom + '\'' +
-                ", pointDeVie=" + pointDeVie +
-                ", attaqueParSeconde=" + attaqueParSeconde +
-                ", degatAttaque=" + degatAttaque +
+                ", pointDeVie=" + point_de_vie +
+                ", attaqueParSeconde=" + attaque_par_seconde +
+                ", degatAttaque=" + degat_attaque +
                 ", cout=" + cout +
-                ", soleilParSeconde=" + soleilParSeconde +
+                ", soleilParSeconde=" + soleil_par_seconde +
                 ", effet='" + effet + '\'' +
-                ", cheminImage='" + cheminImage + '\'' +
+                ", cheminImage='" + chemin_image + '\'' +
                 '}';
     }
 }

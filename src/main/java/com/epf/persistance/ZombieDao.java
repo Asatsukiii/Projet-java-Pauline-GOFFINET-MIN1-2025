@@ -18,8 +18,8 @@ public class ZombieDao {
     // Ajouter un zombie
     public void create(Zombie zombie) {
         String sql = "INSERT INTO zombie (nom, point_de_vie, attaque_par_seconde, degat_attaque, vitesse_de_deplacement, chemin_image, id_map) " + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, zombie.getNom(), zombie.getPointDeVie(), zombie.getAttaqueParSeconde(),
-                zombie.getDegatAttaque(), zombie.getVitesseDeDeplacement(), zombie.getCheminImage(), zombie.getIdMap());
+        jdbcTemplate.update(sql, zombie.getNom(), zombie.getPoint_de_vie(), zombie.getAttaque_par_seconde(),
+                zombie.getDegat_attaque(), zombie.getVitesse_de_deplacement(), zombie.getChemin_image(), zombie.getId_map());
     }
 
     // Récupérer tous les zombies
@@ -51,4 +51,20 @@ public class ZombieDao {
                 rs.getInt("id_map")
         ), id);
     }
+
+    public void update(Zombie zombie) {
+        String sql = "UPDATE zombie SET nom = ?, point_de_vie = ?, attaque_par_seconde = ?, degat_attaque = ?, vitesse_de_deplacement = ?, chemin_image = ?, id_map = ? WHERE id_zombie = ?";
+
+        jdbcTemplate.update(sql,
+                zombie.getNom(),
+                zombie.getPoint_de_vie(),
+                zombie.getAttaque_par_seconde(),
+                zombie.getDegat_attaque(),
+                zombie.getVitesse_de_deplacement(),
+                zombie.getChemin_image(),
+                zombie.getId_map(),
+                zombie.getId_zombie()
+        );
+    }
+
 }

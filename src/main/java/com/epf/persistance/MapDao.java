@@ -17,11 +17,11 @@ public class MapDao {
 
     public void create(MapJeu mapJeu) {
         String sql = "INSERT INTO map (ligne, colonne, chemin_image) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, mapJeu.getLigne(), mapJeu.getColonne(), mapJeu.getCheminImage());
+        jdbcTemplate.update(sql, mapJeu.getLigne(), mapJeu.getColonne(), mapJeu.getChemin_image());
     }
     public void update(MapJeu mapJeu) {
         String sql = "UPDATE map SET ligne = ?, colonne = ?, chemin_image = ? WHERE id_map = ?";
-        jdbcTemplate.update(sql, mapJeu.getLigne(), mapJeu.getColonne(), mapJeu.getCheminImage(), mapJeu.getId());
+        jdbcTemplate.update(sql, mapJeu.getLigne(), mapJeu.getColonne(), mapJeu.getChemin_image(), mapJeu.getId_map());
     }
 
     public void delete(int id) {

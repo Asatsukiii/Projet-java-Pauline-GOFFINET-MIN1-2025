@@ -1,24 +1,24 @@
 package com.epf.core;
 
 public class MapJeu {
-    private int id;
+    private int id_map;
     private int ligne;
     private int colonne;
-    private String cheminImage;
+    private String chemin_image;
 
     public MapJeu() {
     }
 
-    public MapJeu(int id, int ligne, int colonne, String cheminImage) {
-        this.id = id;
+    public MapJeu(int id_map, int ligne, int colonne, String chemin_image) {
+        this.id_map = id_map;
         this.ligne = ligne;
         this.colonne = colonne;
-        this.cheminImage = cheminImage;
+        this.chemin_image = chemin_image;
     }
 
     // Getters
-    public int getId() {
-        return id;
+    public int getId_map() {
+        return id_map;
     }
 
     public int getLigne() {
@@ -29,13 +29,13 @@ public class MapJeu {
         return colonne;
     }
 
-    public String getCheminImage() {
-        return cheminImage;
+    public String getChemin_image() {
+        return chemin_image;
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
+    public void setId_map(int id_map) {
+        this.id_map = id_map;
     }
 
     public void setLigne(int ligne) {
@@ -46,17 +46,17 @@ public class MapJeu {
         this.colonne = colonne;
     }
 
-    public void setCheminImage(String cheminImage) {
-        this.cheminImage = cheminImage;
+    public void setChemin_image(String chemin_image) {
+        this.chemin_image = chemin_image;
     }
 
     @Override
     public String toString() {
         return "MapJeu{" +
-                "id=" + id +
+                "id=" + id_map +
                 ", ligne=" + ligne +
                 ", colonne=" + colonne +
-                ", cheminImage='" + cheminImage + '\'' +
+                ", cheminImage='" + chemin_image + '\'' +
                 '}';
     }
 }

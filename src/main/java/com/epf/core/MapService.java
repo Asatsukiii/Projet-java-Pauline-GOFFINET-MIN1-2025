@@ -28,9 +28,9 @@ public class MapService {
 
             // Trouver la map existante avec l'ID correspondant
             MapJeu existingMap = allMaps.stream()
-                    .filter(map -> map.getId() == mapJeu.getId())
+                    .filter(map -> map.getId_map() == mapJeu.getId_map())
                     .findFirst()
-                    .orElseThrow(() -> new ServiceException("Map non trouvée pour l'ID : " + mapJeu.getId()));
+                    .orElseThrow(() -> new ServiceException("Map non trouvée pour l'ID : " + mapJeu.getId_map()));
 
             // Mettre à jour les champs seulement si la nouvelle valeur est valide
             if (mapJeu.getLigne() != 0) {
@@ -41,8 +41,8 @@ public class MapService {
                 existingMap.setColonne(mapJeu.getColonne());
             }
 
-            if (mapJeu.getCheminImage() != null && !mapJeu.getCheminImage().isEmpty()) {
-                existingMap.setCheminImage(mapJeu.getCheminImage());
+            if (mapJeu.getChemin_image() != null && !mapJeu.getChemin_image().isEmpty()) {
+                existingMap.setChemin_image(mapJeu.getChemin_image());
             }
 
             mapDao.update(existingMap); // On met à jour la map dans la base de données
@@ -73,7 +73,7 @@ public class MapService {
         try {
             List<MapJeu> maps = mapDao.getAllMaps();
             return maps.stream()
-                    .filter(map -> map.getId() == id)
+                    .filter(map -> map.getId_map() == id)
                     .findFirst()
                     .orElseThrow(() -> new ServiceException("Map non trouvée pour l'ID : " + id));
         } catch (Exception e) {
