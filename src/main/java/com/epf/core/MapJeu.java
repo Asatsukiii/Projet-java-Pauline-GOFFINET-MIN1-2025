@@ -6,9 +6,11 @@ public class MapJeu {
     private int colonne;
     private String chemin_image;
 
+    //constructeur vide : nécessaire pour la bonne instantiation d'un json en objet MapJeu (request post et map)
     public MapJeu() {
     }
 
+    //constructeur
     public MapJeu(int id_map, int ligne, int colonne, String chemin_image) {
         this.id_map = id_map;
         this.ligne = ligne;
@@ -50,6 +52,7 @@ public class MapJeu {
         this.chemin_image = chemin_image;
     }
 
+    //fonction Tostring pour l'affichage
     @Override
     public String toString() {
         return "MapJeu{" +

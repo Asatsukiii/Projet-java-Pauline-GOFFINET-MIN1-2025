@@ -17,6 +17,17 @@ public class MapService {
         this.zombieDao = zombieDao;
     }
 
+    // GetAllMaps : Utilisé dans /maps.
+    // Appelle la fonction get all maps du MapDAO qui renvoie l'ensemble des maps en bdd.
+    public List<MapJeu> getAllMaps() throws ServiceException {
+        try {
+            return mapDao.getAllMaps();
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la récupération des maps", e);
+        }
+    }
+
+    // Create : utilisé dans la route post de maps. appelle la fonction create du mapDao qui créée une map en bdd.
     public void create(MapJeu mapJeu) throws ServiceException {
         try {
             mapDao.create(mapJeu);
@@ -24,6 +35,23 @@ public class MapService {
             throw new ServiceException("Erreur lors de la création de la map", e);
         }
     }
+
+    // getMap: Utilisé dans maps/id.
+    // Renvoie la map correspondant à l'id donnée.
+    public MapJeu getMap(int id) throws ServiceException {
+        try {
+            List<MapJeu> maps = mapDao.getAllMaps();
+            return maps.stream()
+                    .filter(map -> map.getId_map() == id)
+                    .findFirst()
+                    .orElseThrow(() -> new ServiceException("Map non trouvée pour l'ID : " + id));
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la récupération des maps", e);
+        }
+    }
+
+    // Update : utilisé dans la route put de maps.
+    // Récupère les maps et sélectionne la map correspondant à l'id de la map du request et met à jour les valeurs de ses paramètres en bdd
     public void update(MapJeu mapJeu) throws ServiceException {
         try {
             // Récupérer toutes les maps
@@ -55,27 +83,9 @@ public class MapService {
     }
 
 
-    public List<MapJeu> getAllMaps() throws ServiceException {
-        try {
-            return mapDao.getAllMaps();
-        } catch (Exception e) {
-            throw new ServiceException("Erreur lors de la récupération des maps", e);
-        }
-    }
-
-    public MapJeu getMap(int id) throws ServiceException {
-        try {
-            List<MapJeu> maps = mapDao.getAllMaps();
-            return maps.stream()
-                    .filter(map -> map.getId_map() == id)
-                    .findFirst()
-                    .orElseThrow(() -> new ServiceException("Map non trouvée pour l'ID : " + id));
-        } catch (Exception e) {
-            throw new ServiceException("Erreur lors de la récupération des maps", e);
-        }
-    }
-
-
+    // Delete : utilisé dans la route delete de maps.
+    // Vérifie si la map existe. appelle d'abord la fonction du zombieDAO permettant de delete les zombies lié à la map,
+    // puis delete la map.
     public void deleteMap(int id) throws ServiceException {
         try {
             MapJeu map = mapDao.getMapById(id);

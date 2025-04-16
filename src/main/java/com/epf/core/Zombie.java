@@ -12,8 +12,10 @@ public class Zombie {
     private String chemin_image;
     private int id_map;
 
+    //constructeur vide : nécessaire pour la bonne instantiation d'un json en objet Zombie (request post et map)
     public Zombie() {
     }
+
     // Constructeur
     public Zombie(int id_zombie, String nom, int point_de_vie, double attaque_par_seconde, int degat_attaque, double vitesse_de_deplacement, String chemin_image, int id_map) {
         this.id_zombie = id_zombie;
@@ -92,7 +94,7 @@ public class Zombie {
         this.id_map = id_map;
     }
 
-    // Méthode pour afficher les infos du zombie
+    // Méthode ToString
     @Override
     public String toString() {
         return "Zombie{" +

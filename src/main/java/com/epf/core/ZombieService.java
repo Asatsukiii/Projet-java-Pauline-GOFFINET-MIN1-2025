@@ -13,7 +13,8 @@ public class ZombieService {
         this.zombieDao = zombieDao;
     }
 
-    // Récupérer tous les zombies
+    // GetAllZombies : Utilisé dans /zombies.
+    // Appelle la fonction get all zombies du zombieDAO qui renvoie l'ensemble des zombies en bdd.
     public List<Zombie> getAllZombies() throws ServiceException {
         try {
             return zombieDao.getAllZombies();
@@ -22,7 +23,7 @@ public class ZombieService {
         }
     }
 
-    // Ajouter un zombie
+    // Create : utilisé dans la route post de zombie. appelle la fonction create du zombieDao qui créée un zombie en BDD
     public void create(Zombie zombie) throws ServiceException {
         try {
             zombieDao.create(zombie);
@@ -31,7 +32,8 @@ public class ZombieService {
         }
     }
 
-
+    // GetZombiebyId : Utilisé dans zombies/id.
+    // Appelle la fonction getZombiesById du zombieDAO qui renvoie le zombie correspondant à l'id donnée
     public Zombie getZombieById(int id) throws ServiceException {
         try {
             return zombieDao.getZombieById(id);
@@ -40,6 +42,8 @@ public class ZombieService {
         }
     }
 
+    // GetZombiebyMapId : Utilisé dans zombies/map/id.
+    // Appelle la fonction findByMapId du zombieDAO qui renvoie les zombies liés à la map ayant pour id MapID
     public List<Zombie> getZombiesByMapId(int mapId) throws ServiceException {
         try {
             return zombieDao.findByMapId(mapId);
@@ -48,7 +52,8 @@ public class ZombieService {
         }
     }
 
-
+    // Update : utilisé dans la route put de zombies.
+    // Récupère les zombies et sélectionne le zombie correspondant à l'id du zombie du request. Met à jour les valeurs de ses paramètres en bdd
     public void update(Zombie zombie) throws ServiceException {
         try {
             // Récupérer le zombie existant depuis la base de données
@@ -89,6 +94,9 @@ public class ZombieService {
             throw new ServiceException("Erreur lors de la mise à jour du zombie", e);
         }
     }
+
+    // Delete : utilisé dans la route delete de zombies.
+    // Vérifie si le zombie existe. Si oui, Delete le zombie en bdd.
     public void deleteZombie(int id) throws ServiceException {
         try {
             // Vérifier si le zombie existe

@@ -1,7 +1,6 @@
 com\epf\core\ServiceException.class
 com\epf\core\PlanteService.class
 com\epf\core\MapService.class
-com\epf\test\TestController.class
 com\epf\TestImport.class
 com\epf\api\ZombieController.class
 com\epf\api\PlanteController.class

@@ -15,6 +15,8 @@ import javax.sql.DataSource;
 
 public class DatabaseConfig {
 
+    // fichier de configuration : database.properties
+
     @Value("${spring.datasource.url}")
     private String url;
 

@@ -16,6 +16,6 @@ public class MainApplication extends AbstractAnnotationConfigDispatcherServletIn
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"}; // Toutes les requêtes passent par Spring MVC
+        return new String[]{"/"};
     }
 }

@@ -13,22 +13,27 @@ import java.util.List;
 @RequestMapping("/zombies") //pour les requetes get
 public class ZombieController {
 
+    //initialisation du zombie service
     private final ZombieService zombieService;
 
     public ZombieController(ZombieService zombieService) {
         this.zombieService = zombieService;
     }
 
+    // /Zombies : affiche un json composé de l'ensemble des zombies en bdd
     @GetMapping
     public List<Zombie> getAllZombies() throws ServiceException {
         return zombieService.getAllZombies();
     }
 
-    @PostMapping //requetes add
+    // route post de plantes : permet de créer une plante en bdd en donnant dans la request les valeurs souhaitées pour les paramètres.
+    @PostMapping
     public void addZombie(@RequestBody Zombie zombie) throws ServiceException {
         System.out.println(zombie.toString());
         zombieService.create(zombie);
     }
+
+    // /zombies/id : affiche les informations du zombie ayant pour id celui mis dans l'url
     @GetMapping("/{id}")
     public ResponseEntity<?> getZombiesById(@PathVariable int id) {
         try {
@@ -40,6 +45,8 @@ public class ZombieController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur interne du serveur");
         }
     }
+
+    // /maps/id : affiche les zombies ayant pour Mapid celui mis dans l'url
     @GetMapping("/map/{id}")
     public ResponseEntity<?> getZombiesByMapId(@PathVariable int id) {
         try {
@@ -55,11 +62,15 @@ public class ZombieController {
         }
     }
 
+    // /validation: route permettant de verifier si le format de données renvoyé par les routes est valide.
     @GetMapping("/validation")
     public ResponseEntity<Zombie> validateZombieFormat() {
         Zombie exampleZombie = new Zombie(1, "Zombie Basique", 150, 1, 25, 1, "chemin/vers/image.png", 2);
         return ResponseEntity.ok(exampleZombie);
     }
+
+    // route put de zombies: permet la modification d'un zombie en récupérant dans la request un id du zombie à modifier
+    // et les nouvelles valeurs des paramètres du zombie.
     @PutMapping("/{id}")
     public ResponseEntity<String> updateZombie(@PathVariable int id, @RequestBody Zombie zombie) throws ServiceException {
         try {
@@ -70,6 +81,8 @@ public class ZombieController {
             return ResponseEntity.badRequest().body("Erreur lors de la mise à jour de la map : " + e.getMessage()); // 400 Bad Request
         }
     }
+
+    // route delete de zombies: permet d'effacer un zombie.
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteZombie(@PathVariable int id) {
         try {

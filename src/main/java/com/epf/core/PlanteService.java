@@ -14,14 +14,8 @@ public class PlanteService {
         this.planteDao = planteDao;
     }
 
-    public void create(Plante plante) throws ServiceException {
-        try {
-            planteDao.create(plante);
-        } catch (Exception e) {
-            throw new ServiceException("Erreur lors de la création de la plante", e);
-        }
-    }
-
+    // GetAllPlantes: Utilisé dans /plantes.
+    // Appelle la fonction get all plantes du planteDAO qui renvoie l'ensemble des plantes en bdd.
     public List<Plante> getAllPlantes() throws ServiceException {
         try {
             return planteDao.getAllPlantes();
@@ -30,14 +24,29 @@ public class PlanteService {
         }
     }
 
+    // Create : utilisé dans la route post de plantes. appelle la fonction create du planteDao qui créée une plante en BDD
+    public void create(Plante plante) throws ServiceException {
+        try {
+            planteDao.create(plante);
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la création de la plante", e);
+        }
+    }
+
+    // GetPlantebyId : Utilisé dans plantes/id.
+    // Appelle la fonction getPlanteById du planteDAO qui renvoie la plante correspondant à l'id donnée
     public Plante getPlantebyId(int id) throws ServiceException {
         try {
             return planteDao.getPlanteById(id);
         } catch (Exception e) {
-            throw new ServiceException("Erreur lors de la récupération du zombie avec l'ID " + id, e);
+            throw new ServiceException("Erreur lors de la récupération de la plante avec l'ID " + id, e);
         }
     }
 
+
+
+    // Update : utilisé dans la route put de plantes.
+    // Récupère les plantes et sélectionne la plante correspondant à l'id de la plante du request. Met à jour les valeurs de ses paramètres en bdd
     public void update(Plante plante) throws ServiceException {
         try {
             // Récupérer la plante existante pour ne pas écraser les champs vides
@@ -75,6 +84,9 @@ public class PlanteService {
             throw new ServiceException("Erreur lors de la mise à jour de la plante", e);
         }
     }
+
+    // Delete : utilisé dans la route delete de plantes.
+    // Vérifie si la plante existe. Si oui, Delete la plante en bdd.
     public void deletePlante(int id) throws ServiceException {
         try {
             // Vérifier si la plante existe
