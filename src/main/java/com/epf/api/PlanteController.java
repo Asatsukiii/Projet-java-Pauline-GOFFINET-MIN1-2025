@@ -57,5 +57,15 @@ public class PlanteController {
             return ResponseEntity.badRequest().body("Erreur lors de la mise à jour de la plante : " + e.getMessage());
         }
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePlante(@PathVariable int id) {
+        try {
+            planteService.deletePlante(id);
+            return ResponseEntity.ok("Plante supprimée avec succès !");
+        } catch (ServiceException e) {
+            return ResponseEntity.badRequest().body("Erreur lors de la suppression de la plante : " + e.getMessage());
+        }
+    }
+
 
 }

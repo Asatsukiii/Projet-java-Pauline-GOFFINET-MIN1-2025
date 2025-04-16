@@ -33,4 +33,15 @@ public class MapDao {
         String sql = "SELECT * FROM map";
         return jdbcTemplate.query(sql, new MapRowMapper());
     }
+
+    public MapJeu getMapById(int id) {
+        String sql = "SELECT * FROM map WHERE id_map = ?";
+        return jdbcTemplate.queryForObject(sql, (rs, rowNum) -> new MapJeu(
+                rs.getInt("id_map"),
+                rs.getInt("ligne"),
+                rs.getInt("colonne"),
+                rs.getString("chemin_image")
+        ), id);
+    }
+
 }

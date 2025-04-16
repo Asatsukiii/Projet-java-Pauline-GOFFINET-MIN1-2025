@@ -31,7 +31,7 @@ public class ZombieService {
         }
     }
 
-    // Récupérer un zombie par son ID
+
     public Zombie getZombieById(int id) throws ServiceException {
         try {
             return zombieDao.getZombieById(id);
@@ -39,6 +39,15 @@ public class ZombieService {
             throw new ServiceException("Erreur lors de la récupération du zombie avec l'ID " + id, e);
         }
     }
+
+    public List<Zombie> getZombiesByMapId(int mapId) throws ServiceException {
+        try {
+            return zombieDao.findByMapId(mapId);
+        } catch (Exception e) {
+            throw new ServiceException("Impossible de récupérer les zombies pour la map " + mapId, e);
+        }
+    }
+
 
     public void update(Zombie zombie) throws ServiceException {
         try {
@@ -80,5 +89,19 @@ public class ZombieService {
             throw new ServiceException("Erreur lors de la mise à jour du zombie", e);
         }
     }
+    public void deleteZombie(int id) throws ServiceException {
+        try {
+            // Vérifier si le zombie existe
+            Zombie zombie = zombieDao.getZombieById(id);
+            if (zombie == null) {
+                throw new ServiceException("Zombie non trouvé pour l'ID : " + id);
+            }
+            // Appeler la méthode DAO pour supprimer le zombie
+            zombieDao.delete(id);
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la suppression du zombie avec l'ID : " + id, e);
+        }
+    }
+
 
 }

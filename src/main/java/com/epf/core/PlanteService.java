@@ -75,5 +75,19 @@ public class PlanteService {
             throw new ServiceException("Erreur lors de la mise à jour de la plante", e);
         }
     }
+    public void deletePlante(int id) throws ServiceException {
+        try {
+            // Vérifier si la plante existe
+            Plante plante = planteDao.getPlanteById(id);
+            if (plante == null) {
+                throw new ServiceException("Plante non trouvée pour l'ID : " + id);
+            }
+            // Appeler la méthode DAO pour supprimer la plante
+            planteDao.delete(id);
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la suppression de la plante avec l'ID : " + id, e);
+        }
+    }
+
 
 }

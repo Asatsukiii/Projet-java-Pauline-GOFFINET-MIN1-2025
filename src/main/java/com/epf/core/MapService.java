@@ -1,6 +1,7 @@
 package com.epf.core;
 
 import com.epf.persistance.MapDao;
+import com.epf.persistance.ZombieDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.List;
 public class MapService {
 
     private final MapDao mapDao;
+    private final ZombieDao zombieDao;
 
-    public MapService(MapDao mapDao) {
+    public MapService(MapDao mapDao, ZombieDao zombieDao) {
         this.mapDao = mapDao;
+        this.zombieDao = zombieDao;
     }
 
     public void create(MapJeu mapJeu) throws ServiceException {
@@ -52,15 +55,6 @@ public class MapService {
     }
 
 
-
-    public void delete(int id) throws ServiceException {
-        try {
-            mapDao.delete(id);
-        } catch (Exception e) {
-            throw new ServiceException("Erreur lors de la suppression de la map avec l'ID : " + id, e);
-        }
-    }
-
     public List<MapJeu> getAllMaps() throws ServiceException {
         try {
             return mapDao.getAllMaps();
@@ -81,5 +75,20 @@ public class MapService {
         }
     }
 
+
+    public void deleteMap(int id) throws ServiceException {
+        try {
+            MapJeu map = mapDao.getMapById(id);
+            if (map == null) {
+                throw new ServiceException("Map non trouvée pour l'ID : " + id);
+            }
+
+            zombieDao.deleteZombiesByMapId(id);
+            mapDao.delete(id);
+
+        } catch (Exception e) {
+            throw new ServiceException("Erreur lors de la suppression de la map avec l'ID : " + id, e);
+        }
+    }
 
 }

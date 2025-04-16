@@ -69,4 +69,9 @@ public class PlanteDao {
         );
     }
 
+    public void delete(int id) {
+        String sql = "DELETE FROM plante WHERE id_plante = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
 }

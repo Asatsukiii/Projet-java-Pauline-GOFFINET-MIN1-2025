@@ -65,8 +65,13 @@ public class MapController {
 
 
     @DeleteMapping("/{id}")
-    public void deleteMap(@PathVariable int id) throws ServiceException {
-        mapService.delete(id);
+    public ResponseEntity<String> deleteMap(@PathVariable int id) {
+        try {
+            mapService.deleteMap(id);
+            return ResponseEntity.ok("Map et ses zombies supprimés avec succès !");
+        } catch (ServiceException e) {
+            return ResponseEntity.badRequest().body("Erreur lors de la suppression de la map : " + e.getMessage());
+        }
     }
 
 

@@ -66,5 +66,29 @@ public class ZombieDao {
                 zombie.getId_zombie()
         );
     }
+    public List<Zombie> findByMapId(int mapId) {
+        String sql = "SELECT * FROM zombie WHERE id_map = ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> new Zombie(
+                rs.getInt("id_zombie"),
+                rs.getString("nom"),
+                rs.getInt("point_de_vie"),
+                rs.getDouble("attaque_par_seconde"),
+                rs.getInt("degat_attaque"),
+                rs.getDouble("vitesse_de_deplacement"),
+                rs.getString("chemin_image"),
+                rs.getInt("id_map")
+        ), mapId);
+    }
+
+
+    public void delete(int id) {
+        String sql = "DELETE FROM zombie WHERE id_zombie = ?";
+        jdbcTemplate.update(sql, id);
+    }
+    public void deleteZombiesByMapId(int idMap) {
+        String sql = "DELETE FROM zombie WHERE id_map = ?";
+        jdbcTemplate.update(sql, idMap);
+    }
+
 
 }
