@@ -15,7 +15,7 @@ public class MapJeuTest {
         MapJeu map = new MapJeu(1, 9, 15, "img/map1.png");
 
         assertEquals(1, map.getId_map());
-        assertEquals(10, map.getLigne());
+        assertEquals(9, map.getLigne());
         assertEquals(15, map.getColonne());
         assertEquals("img/map1.png", map.getChemin_image());
     }
