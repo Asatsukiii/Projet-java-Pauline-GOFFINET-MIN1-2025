@@ -8,9 +8,11 @@ import java.util.List;
 public class ZombieService {
 
     private final ZombieDao zombieDao;
+    private final MapService mapService;
 
-    public ZombieService(ZombieDao zombieDao) {
+    public ZombieService(ZombieDao zombieDao, MapService mapService) {
         this.zombieDao = zombieDao;
+        this.mapService= mapService;
     }
 
     // GetAllZombies : Utilisé dans /zombies.
@@ -23,9 +25,13 @@ public class ZombieService {
         }
     }
 
-    // Create : utilisé dans la route post de zombie. appelle la fonction create du zombieDao qui créée un zombie en BDD
+    // Create : utilisé dans la route post de zombie.
+    // Appelle la fonction create du zombieDao qui créée un zombie en BDD
     public void create(Zombie zombie) throws ServiceException {
         try {
+            if (!mapService.mapExiste(zombie.getId_map())) {
+                throw new IllegalArgumentException("La map avec l'ID " + zombie.getId_map() + " n'existe pas");
+            }
             zombieDao.create(zombie);
         } catch (Exception e) {
             throw new ServiceException("Erreur lors de la création du zombie", e);
@@ -84,7 +90,7 @@ public class ZombieService {
                 existingZombie.setChemin_image(zombie.getChemin_image());
             }
 
-            if (zombie.getId_map() != 0) {
+            if (!mapService.mapExiste(zombie.getId_map())) {
                 existingZombie.setId_map(zombie.getId_map());
             }
 

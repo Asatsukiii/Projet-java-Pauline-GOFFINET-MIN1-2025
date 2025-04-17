@@ -17,7 +17,26 @@ public class Plante {
     }
 
     // Constructeur
-    public Plante(int id_plante, String nom, int point_de_vie, double attaque_par_seconde, int degat_attaque, int cout, double soleil_par_seconde, String effet, String chemin_image) {
+    public Plante(int id_plante, String nom, int point_de_vie, double attaque_par_seconde,
+                  int degat_attaque, int cout, double soleil_par_seconde, String effet, String chemin_image) {
+        // On vérifie d'abord que les point de vie, l'attaque, les degat, le cout et les soleil/seconde ne sont pas négatifs
+        // si l'un d'entre eux est négatif génère erreur.
+        if (point_de_vie < 0) {
+            throw new IllegalArgumentException("Les points de vie ne peuvent pas être négatifs");
+        }
+        if (attaque_par_seconde < 0) {
+            throw new IllegalArgumentException("L'attaque par seconde ne peut pas être négative");
+        }
+        if (degat_attaque < 0) {
+            throw new IllegalArgumentException("Les dégâts d'attaque ne peuvent pas être négatifs");
+        }
+        if (cout < 0) {
+            throw new IllegalArgumentException("Le coût ne peut pas être négatif");
+        }
+        if (soleil_par_seconde < 0) {
+            throw new IllegalArgumentException("Le soleil généré par seconde ne peut pas être négatif");
+        }
+
         this.id_plante = id_plante;
         this.nom = nom;
         this.point_de_vie = point_de_vie;
@@ -28,6 +47,7 @@ public class Plante {
         this.effet = effet;
         this.chemin_image = chemin_image;
     }
+
 
 
     // Getters

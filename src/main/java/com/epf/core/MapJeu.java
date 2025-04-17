@@ -12,11 +12,17 @@ public class MapJeu {
 
     //constructeur
     public MapJeu(int id_map, int ligne, int colonne, String chemin_image) {
+        // On vérifie si les chiffres donnés pour les ligne et colonne ne sont pas négatifs.
+        // S'ils le sont, lance une erreur
+        if (ligne < 0 || colonne < 0) {
+            throw new IllegalArgumentException("Les dimensions de la carte ne peuvent pas être négatives");
+        }
         this.id_map = id_map;
         this.ligne = ligne;
         this.colonne = colonne;
         this.chemin_image = chemin_image;
     }
+
 
     // Getters
     public int getId_map() {

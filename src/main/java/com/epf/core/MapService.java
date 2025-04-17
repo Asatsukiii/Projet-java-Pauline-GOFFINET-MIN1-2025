@@ -50,6 +50,13 @@ public class MapService {
         }
     }
 
+    // MapExiste: utilisé .
+    // Retourne un boolean vérifiant si l'ID fournit a la fonction est un ID de map valide
+    public boolean mapExiste(int id_map)  {
+        List<MapJeu> maps = mapDao.getAllMaps();
+        return maps.stream().anyMatch(map -> map.getId_map() == id_map);
+    }
+
     // Update : utilisé dans la route put de maps.
     // Récupère les maps et sélectionne la map correspondant à l'id de la map du request et met à jour les valeurs de ses paramètres en bdd
     public void update(MapJeu mapJeu) throws ServiceException {
@@ -64,11 +71,11 @@ public class MapService {
                     .orElseThrow(() -> new ServiceException("Map non trouvée pour l'ID : " + mapJeu.getId_map()));
 
             // Mettre à jour les champs seulement si la nouvelle valeur est valide
-            if (mapJeu.getLigne() != 0) {
+            if (mapJeu.getLigne() > 0) {
                 existingMap.setLigne(mapJeu.getLigne());
             }
 
-            if (mapJeu.getColonne() != 0) {
+            if (mapJeu.getColonne() > 0) {
                 existingMap.setColonne(mapJeu.getColonne());
             }
 

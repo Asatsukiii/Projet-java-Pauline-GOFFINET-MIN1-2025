@@ -36,6 +36,7 @@ public class ZombieController {
     // /zombies/id : affiche les informations du zombie ayant pour id celui mis dans l'url
     @GetMapping("/{id}")
     public ResponseEntity<?> getZombiesById(@PathVariable int id) {
+        //si le zombie n'existe pas ou que le serveur a eu un probleme, on retourne une erreur
         try {
             Zombie Zombie = zombieService.getZombieById(id);
             return ResponseEntity.ok(Zombie);
@@ -50,6 +51,7 @@ public class ZombieController {
     @GetMapping("/map/{id}")
     public ResponseEntity<?> getZombiesByMapId(@PathVariable int id) {
         try {
+            //si la map n'a pas de zombie associé, retourne une erreur, sinon retourne la liste des zombies
             List<Zombie> zombies = zombieService.getZombiesByMapId(id);
             if (zombies.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucun zombie trouvé pour cette map.");
@@ -64,7 +66,7 @@ public class ZombieController {
 
     // /validation: route permettant de verifier si le format de données renvoyé par les routes est valide.
     @GetMapping("/validation")
-    public ResponseEntity<Zombie> validateZombieFormat() {
+    public ResponseEntity<Zombie> validateZombieFormat() throws ServiceException {
         Zombie exampleZombie = new Zombie(1, "Zombie Basique", 150, 1, 25, 1, "chemin/vers/image.png", 2);
         return ResponseEntity.ok(exampleZombie);
     }

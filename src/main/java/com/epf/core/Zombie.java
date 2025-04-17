@@ -1,7 +1,5 @@
 package com.epf.core;
 
-
-
 public class Zombie {
     private int id_zombie;
     private String nom;
@@ -18,6 +16,21 @@ public class Zombie {
 
     // Constructeur
     public Zombie(int id_zombie, String nom, int point_de_vie, double attaque_par_seconde, int degat_attaque, double vitesse_de_deplacement, String chemin_image, int id_map) {
+        //on vérifie que l'attaque, les point de vie, les dégâts et la vitesse ne sont pas négatifs,
+        // sinon génère erreur
+        if (point_de_vie < 0) {
+            throw new IllegalArgumentException("Les points de vie ne peuvent pas être négatifs");
+        }
+        if (attaque_par_seconde < 0) {
+            throw new IllegalArgumentException("L'attaque par seconde ne peut pas être négative");
+        }
+        if (degat_attaque < 0) {
+            throw new IllegalArgumentException("Les dégâts d'attaque ne peuvent pas être négatifs");
+        }
+        if (vitesse_de_deplacement < 0) {
+            throw new IllegalArgumentException("La vitesse de déplacement ne peut pas être négative");
+        }
+
         this.id_zombie = id_zombie;
         this.nom = nom;
         this.point_de_vie = point_de_vie;
